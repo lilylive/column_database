@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    h3 投稿されたコラム一覧
+        table
+          tr
+            th コラムID
+            th コラム名
+            th コラム作者
+            th 本文
+            th 更新日時
+            th 掲載可否
+            th 
+          each beforeCheckedColumn in beforeCheckedColumns
+            tr
+                td #{beforeCheckedColumn.columnId}
+                td #{beforeCheckedColumn.columnName} 
+                td #{beforeCheckedColumn.columnAuthor}
+                td #{beforeCheckedColumn.memo}
+                td #{beforeCheckedColumn.updatedAt}
+                td #{beforeCheckedColumn.adminCheck}
+                td
+                  div
+                      button(
+                        data-column-id=beforeCheckedColumn.columnId
+                        data-column-author=beforeCheckedColumn.columauthor
+                        data-column-admincheck=beforeCheckedColumn.adminCheck
+                        ).admit-button 承認
+                  
+                  div
+                      button(
+                        data-column-id=beforeCheckedColumn.columnId
+                        data-column-author=beforeCheckedColumn.columauthor
+                        data-column-admincheck=beforeCheckedColumn.adminCheck
+                        ).disadmit-button 非承認
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
+
+
+            
+

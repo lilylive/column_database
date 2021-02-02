@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  a(href="/auth/twitter") Twitterでログイン
+  if user
+     p 現在 #{user.username} でログイン中
+     

@@ -1,0 +1,7 @@
+{
+  "name": "column_2021_07",
+  "description": "コラムくん",
+  "logo": "",
+  "keywords": ["node"],
+  "image": "heroku/nodejs"
+}

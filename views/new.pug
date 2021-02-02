@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  form(method="post", action="/posts")
+    div
+      h5 コラム名
+      input(type="text" name="columnName")
+    div
+      h5 投稿者名
+      input(type="text" name="columnAuthor")
+    div
+      h5 コラム本文
+      textarea(name="memo")
+    
+    button(type="submit") コラムを応募する

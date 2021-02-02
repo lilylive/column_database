@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+    h3 あなたの作ったコラム一覧
+        table
+          tr
+            th コラム名
+            th 作者名
+            th 更新日時
+          each column in columns
+            tr
+              td
+                a(href=`/posts/${column.columnId}`) #{column.columnName}
+              td #{column.columnAuthor}
+              td #{column.updatedAt}
+      
+
+          

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h4 タイトル：#{columnName}
+  //p(style="white-space:pre;") #{column.memo}
+  p 作成者: #{columnAuthor} 
+  div
+    h3 本文:  #{memo}
+  
+  - var isMine = parseInt(user.id) === parseInt(createdBy)
+  if isMine
+  div
+      a(href=`/posts/${columnId}/edit`) この予定を編集する
+      
+  

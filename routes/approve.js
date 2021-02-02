@@ -1,34 +1,28 @@
 'use strict';
 const express = require('express');
-require('dotenv').config();
 const router = express.Router();
 const Column = require('../models/column');
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  const title = 'コラムくん';
-  if (req.user) {
-    Column.findAll({
+
+router.get('/admitted', (req, res, next) => {
+  const title = '公開中のコラム一覧';
+  
+  Column.findAll({
       where: {
-        createdBy: req.user.id
+        adminCheck: '1'　|| 1
       },
       order: [['"updatedAt"', 'DESC']]
     }).then((columns) => {
-      res.render('index', {
+      res.render('admitted', {
         title: title,
         user: req.user,
-        columns: columns,
-       
-        
+        columns: columns 
         
       });
     });
     
-  } else {
-    res.render('index', { title: title});
-  }
+   
 });
-
 
 
 module.exports = router;
