@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-require('dotenv').config();
+//require('dotenv').config();
 const router = express.Router();
 const Column = require('../models/column');
 const moment = require('moment-timezone');
