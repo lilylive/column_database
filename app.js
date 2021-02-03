@@ -88,6 +88,7 @@ app.use('/posts', postsRouter);
 app.use('/editor', editorRouter);
 app.use('/editor', admittedRouter);
 
+
 app.get('/auth/twitter',
   passport.authenticate('twitter', { scope: ['user:email'] }),
   function (req, res) {

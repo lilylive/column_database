@@ -1,14 +1,18 @@
 extends layout
 
 block content
-  h3 予定の編集
+  h3.my-3 予定の編集
   form(method="post", action=`/posts/${column.columnId}?edit=1`)
-    div
-      h5 予定名
-      input(type="text" name="columnName" value=column.columnName)
-    div
-      h5 本文
-      textarea(name="memo") #{column.memo}
+    input(type="hidden" name="_csrf" value!=csrfToken)
+    div.form-group
+      label(for="columnName") 予定名
+      input(type="text" name="columnName" value=column.columnName)#columnName.form-control
+    div.form-group
+      label(for="memo") 本文
+      textarea(name="memo")#memo.form-control #{column.memo}
     
-    div
-      button(type="submit") 以上の内容で予定を編集する
+    
+      button(type="submit").btn.btn-info.my-2 以上の内容でコラムを編集する
+
+
+    

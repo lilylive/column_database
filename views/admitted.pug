@@ -2,10 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  div
-    h3 あなたの作ったコラム一覧
-        table
+  
+  div.my-5
+    h3 現在公開中の作品一覧
+        table.table
           tr
             th コラム名
             th 作者名
@@ -15,7 +15,7 @@ block content
               td
                 a(href=`/posts/${column.columnId}`) #{column.columnName}
               td #{column.columnAuthor}
-              td #{column.updatedAt}
+              td #{column.formattedUpdatedAt}
       
 
           

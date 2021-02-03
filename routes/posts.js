@@ -1,16 +1,21 @@
 'use strict';
+
+//コラムの投稿に関する処理を扱う。column.pugにデータを渡す。
+
 const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('uuid');
 const Column = require('../models/column');
 const User = require('../models/user');
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 
-router.get('/new', authenticationEnsurer, (req, res, next) => {
-  res.render('new', { user: req.user });
+router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
+  res.render('new', { user: req.user, csrfToken: req.csrfToken() });
 });
 
-router.post('/', authenticationEnsurer, (req, res, next) => {
+router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   
   const columnId = uuid.v4();
   const updatedAt = new Date();
@@ -27,7 +32,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     });
   });
 
-router.get('/:columnId', authenticationEnsurer, (req, res, next) => {
+router.get('/:columnId', authenticationEnsurer, csrfProtection,  (req, res, next) => {
   Column.findOne({
     include: [
       {
@@ -40,7 +45,7 @@ router.get('/:columnId', authenticationEnsurer, (req, res, next) => {
     order: [['"updatedAt"', 'DESC']]
   }).then((column) => {
     if (column) {
-      console.log(Column.columnId);
+      //console.log(req.user.id); 消す
          res.render('column', {
               user: req.user,
               columnName: column.columnName,
@@ -48,7 +53,8 @@ router.get('/:columnId', authenticationEnsurer, (req, res, next) => {
               memo: column.memo,
               username: column.user.username,
               createdBy: column.createdBy,
-              columnId: column.columnId
+              columnId: column.columnId,
+              
             });
     } else {
       const err = new Error('指定された予定は見つかりません');
@@ -58,7 +64,7 @@ router.get('/:columnId', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/:columnId/edit', authenticationEnsurer, (req, res, next) => {
+router.get('/:columnId/edit', authenticationEnsurer,　csrfProtection, (req, res, next) => {
   Column.findOne({
     where: {
       columnId: req.params.columnId
@@ -68,7 +74,8 @@ router.get('/:columnId/edit', authenticationEnsurer, (req, res, next) => {
       
         res.render('edit', {
           user: req.user,
-          column: column
+          column: column,
+          csrfToken: req.csrfToken()
         });
 
     } else {
@@ -84,8 +91,8 @@ function isMine(req, column) {
 
 }
 
-router.post('/:columnId', authenticationEnsurer, (req, res, next) => {
-    console.log(req);
+router.post('/:columnId', authenticationEnsurer, csrfProtection, (req, res, next) => {
+    //console.log(req);　消す
     Column.findOne({
       where: {
         columnId: req.params.columnId
@@ -104,9 +111,10 @@ router.post('/:columnId', authenticationEnsurer, (req, res, next) => {
 
             
             
-              res.redirect('/column/' + column.columnId);
+              res.redirect('/posts/' + column.columnId);
             
           });
+          
         } else {
           const err = new Error('不正なリクエストです');
           err.status = 400;
@@ -116,7 +124,6 @@ router.post('/:columnId', authenticationEnsurer, (req, res, next) => {
       }
     });
   });
-  
   
 
 router.get('/')

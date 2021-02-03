@@ -5,9 +5,11 @@ require('dotenv').config();
 const Column = require('../models/column');
 const uuid = require('uuid');
 const { where } = require('sequelize');
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
+//投稿されたコラムの承認、非承認を決定
 
-
-router.get('/',authenticationEnsurer, (req, res, next) => {
+router.get('/',authenticationEnsurer, csrfProtection,  (req, res, next) => {
   if(req.user.username == process.env.ADMIN_ID){
   
   Column.findAll({
@@ -35,7 +37,7 @@ router.get('/',authenticationEnsurer, (req, res, next) => {
 });
 
 
-router.post('/columnId/:columnId', authenticationEnsurer, (req, res, next) => {
+router.post('/columnId/:columnId', authenticationEnsurer, csrfProtection,  (req, res, next) => {
   
     const columnId = req.params.columnId;
     //const columnAuthor = req.body.columnAuthor;

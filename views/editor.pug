@@ -2,7 +2,7 @@ extends layout
 
 block content
     h3 投稿されたコラム一覧
-        table
+        table.table
           tr
             th コラムID
             th コラム名
@@ -17,18 +17,18 @@ block content
                 td #{beforeCheckedColumn.columnName} 
                 td #{beforeCheckedColumn.columnAuthor}
                 td #{beforeCheckedColumn.memo}
-                td #{beforeCheckedColumn.updatedAt}
+                td #{beforeCheckedColumn.formattedUpdatedAt}
                 td #{beforeCheckedColumn.adminCheck}
                 td
                   div
-                      button(
+                      button.btn.btn-info.my-3(
                         data-column-id=beforeCheckedColumn.columnId
                         data-column-author=beforeCheckedColumn.columauthor
                         data-column-admincheck=beforeCheckedColumn.adminCheck
                         ).admit-button 承認
                   
                   div
-                      button(
+                      button.btn.btn-danger.my-3(
                         data-column-id=beforeCheckedColumn.columnId
                         data-column-author=beforeCheckedColumn.columauthor
                         data-column-admincheck=beforeCheckedColumn.adminCheck

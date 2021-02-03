@@ -1,23 +1,25 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div
+  div.jumbotron.my-2
+    h1.display-4 コラムくん
+    p.lead コラムくんはtwitterで認証でき、コラムを投稿されるサービスです
+  
     - var admin =process.env.ADMIN_ID;
-    if user  && user.username==admin
-      p 管理者IDでログイン中
+  if user  && user.username==admin
+    div.my-3
+      p.lead.my-2 管理者IDでログイン中
       a(href="/logout") #{user.username} をログアウト
       
-      div
-          a(href="/editor") 管理者ページにログイン
-      div
-        a(href="/posts/new") コラムを作る
+      div.my-3
+        a(href="/editor") 管理者ページにログイン
+      div.my-3
+        a(href="/posts/new").btn.btn-info.my-3 コラムを作る
       - var hasColumn = columns.length > 0
       if hasColumn
       div
-        h3 あなたの作ったコラム一覧
-        table
+        h4.my-3 あなたの作ったコラム一覧
+        table.table
           tr
             th コラム名
             th 更新日時
@@ -25,28 +27,29 @@ block content
             tr
               td
                 a(href=`/posts/${column.columnId}`) #{column.columnName}
-              td #{column.updatedAt}
+              td #{column.formattedUpdatedAt}
       
       
     
-      div
-         a(href="/editor/admitted") 公開中のコラム一覧  
+      div.my-3
+        h3 公開中のコラムはコチラ！
+         a(href="/editor/admitted").btn.btn-info.my-3 公開中のコラム一覧  
           
 
           
 
 
 
-    else if user
-      div
+  else if user
+      div.my-3
         a(href="/logout") #{user.username} をログアウト
-      div
+      div.my-3
         a(href="/posts/new") コラムを作る
 
       - var hasColumn = columns.length > 0
       if hasColumn
-        h3 あなたの作ったコラム一覧
-        table
+        h4.my-3 あなたの作ったコラム一覧
+        table.table
           tr
             th コラム名
             th 更新日時
@@ -54,14 +57,14 @@ block content
             tr
               td
                 a(href=`/posts/${column.columnId}`) #{column.columnName}
-              td #{column.updatedAt}
-      div
+              td #{column.formattedUpdatedAt}
+      div.my-3
          a(href="/editor/admitted") 公開中のコラム一覧  
    
-    else 
+  else 
       a(href="/login") ログイン
 
-      div
+      div.my-3
          a(href="/editor/admitted") 公開中のコラム一覧  
           
           
