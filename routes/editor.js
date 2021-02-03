@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
-require('dotenv').config();
+//require('dotenv').config();
 const Column = require('../models/column');
 const uuid = require('uuid');
 const { where } = require('sequelize');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
-//投稿されたコラムの承認、非承認を決定
+//投稿されたコラムの承認、非承認を決めるため一覧でページ表示
 
 router.get('/',authenticationEnsurer, csrfProtection,  (req, res, next) => {
   if(req.user.username == process.env.ADMIN_ID){
