@@ -24,7 +24,7 @@ User.sync().then(() => {
 
 
 //環境変数設定のためにインストールしたモジュールを使用
-//require('dotenv').config();
+require('dotenv').config();
 //Twitter認証の為の設定
 var TwitterStrategy = require('passport-twitter').Strategy;
 var TWITTER_CONSUMER_ID = process.env.TWITTER_CONSUMER_ID;

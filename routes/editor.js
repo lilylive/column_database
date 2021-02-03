@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
-//require('dotenv').config();
+require('dotenv').config();
 const Column = require('../models/column');
 const uuid = require('uuid');
 const { where } = require('sequelize');
