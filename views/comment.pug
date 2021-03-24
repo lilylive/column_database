@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h3.my-3 コメントの編集
+  form(method="post", action=`/posts/columnId/${column.columnId}/commentId/${comment.commentId}/commentEdit?edit=1`)
+    div.form-group
+      label(for="comment") コメント本文
+      textarea(name="comment")#comment.form-control #{comment.comment}
+    
+    
+      button(type="submit").btn.btn-info.my-2 上記の内容でコメントを編集する
+
+      h3.my-3 コメントの編集
+  form(method="post", action=`/posts/columnId/${column.columnId}/commentId/${comment.commentId}/commentEdit?delete=1`)
+    div.form-group
+      button(type="submit").btn.btn-danger.my-2 コメントを削除する

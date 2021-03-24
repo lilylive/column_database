@@ -9,12 +9,14 @@ block content
           tr
             th コラム名
             th 作者名
+            th 本文
             th 更新日時
           each column in columns
             tr
               td
-                a(href=`/posts/${column.columnId}`) #{column.columnName}
+                a(href=`/posts/columnId/${column.columnId}`) #{column.columnName}
               td #{column.columnAuthor}
+              td #{column.memo}
               td #{column.formattedUpdatedAt}
       
 

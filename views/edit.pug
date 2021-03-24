@@ -2,7 +2,7 @@ extends layout
 
 block content
   h3.my-3 予定の編集
-  form(method="post", action=`/posts/${column.columnId}?edit=1`)
+  form(method="post", action=`/posts/columnId/${column.columnId}?edit=1`)
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
       label(for="columnName") 予定名
@@ -13,6 +13,16 @@ block content
     
     
       button(type="submit").btn.btn-info.my-2 以上の内容でコラムを編集する
+
+  h3.my-3 危険な変更
+  form(method="post", action=`/posts/columnId/${column.columnId}?delete=1`)
+    input(type="hidden" name="_csrf" value!=csrfToken)
+    div.form-check
+      input(type='checkbox' value='checked' required='required' )#deleatCheck
+      label(for='deleatCheck').my-3 本当に削除する場合はこちらをクリックしてください。
+
+        
+    button(type="submit").btn.btn-danger このコラムを削除する
 
 
     

@@ -3,19 +3,17 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Comment = require('../models/comment');
+const Column = require('../models/column');
+const commentController = require('../controllers/comment');
+//const User = require('../models/user');
+//const uuid = require('uuid');
 
-router.post('/:columnId/users/:userId/comments', authenticationEnsurer, (req, res, next) => {
-  const columnId = req.params.columnId;
-  const userId = req.params.userId;
-  const comment = req.body.comment;
 
-  Comment.create({
-    columnId: columnId,
-    userId: userId,
-    comment: comment.slice(0, 255)
-  }).then(() => {
-    res.json({ status: 'OK', comment: comment });
-  });
-});
+
+router.post('/columnId/:columnId/comments', authenticationEnsurer, commentController.commentCreate);
+
+router.get('/columnId/:columnId/commentId/:commentId/commentEdit', authenticationEnsurer,commentController.commentDisplay);
+
+router.post('/columnId/:columnId/commentId/:commentId/commentEdit', authenticationEnsurer, commentController.commentUpdate);
 
 module.exports = router;

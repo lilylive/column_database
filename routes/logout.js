@@ -1,10 +1,8 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const logoutController = require('../controllers/logout');
 
-router.get('/', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
-});
+router.get('/', logoutController);
 
 module.exports = router;

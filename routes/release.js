@@ -1,16 +1,10 @@
 'use strict';
 const express = require('express');
+const doRelease = require('../controllers/release');
 require('dotenv').config();
 const router = express.Router();
 const Column = require('../models/column');
-const moment = require('moment-timezone');
-const indexController = require('../controllers/index');
+const releaseController = require('../controllers/release');
 
-
-
-/* GET home page. */
-router.get('/', indexController);
-
-
-
+router.get('/', releaseController);
 module.exports = router;

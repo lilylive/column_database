@@ -10,11 +10,16 @@ const Comment = loader.database.define('comments', {
   },
   userId: {
     type: Sequelize.BIGINT,
-    primaryKey: true,
     allowNull: false
   },
   comment: {
     type: Sequelize.STRING,
+    allowNull: false
+  },
+  commentId: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   }
 }, {

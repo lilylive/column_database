@@ -60,9 +60,12 @@ passport.deserializeUser(function (obj, done) {
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
+var commentsRouter = require('./routes/comments');
 var postsRouter = require('./routes/posts');
 var editorRouter = require('./routes/editor');
 var admittedRouter = require('./routes/approve');
+const { request } = require('express');
+
 
 var app = express();
 app.use(helmet());
@@ -84,6 +87,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/posts', commentsRouter);
 app.use('/posts', postsRouter);
 app.use('/editor', editorRouter);
 app.use('/editor', admittedRouter);

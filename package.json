@@ -25,7 +25,7 @@
     "pg-hstore": "2.3.2",
     "popper.js": "1.14.0",
     "pug": "2.0.0-beta11",
-    "sequelize": "4.33.4",
+    "sequelize": "^6.5.0",
     "uuid": "3.3.2"
   },
   "devDependencies": {

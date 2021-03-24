@@ -15,7 +15,38 @@ block content
   
   - var isMine = parseInt(user.id) === parseInt(createdBy)
   if isMine
-    a(href=`/posts/${columnId}/edit`).btn.btn-info.my-3 コラムの編集
+    a(href=`/posts/columnId/${columnId}/edit`).btn.btn-info.my-3 コラムの編集
 
+  form(method='post', action=`/posts/columnId/${columnId}/comments`)
+    div.form-group 
+      label(for="comment") コメント
+      textarea(name="comment")#comment.form-control
+      button.my-3.btn.btn-info(type="submit") コメントを投稿する
+
+
+
+
+
+  if comments
+    h4.my-2 コメント一覧
+      table.table
+        tr
+          th ユーザID
+          th コメント
+        each comment in comments
+          if comment.userId === user.id || ADMIN_COMMENT_ID
+            tr           
+              td #{comment.userId} 
+              td #{comment.comment} 
+                a(href=`/posts/columnId/${columnId}/commentId/${comment.commentId}/commentEdit`).btn.btn-info.my-2.mx-3   編集
+
+          else
+            tr
+              td #{comment.userId} 
+              td #{comment.comment}
+          
+            
+          
+          
 
   

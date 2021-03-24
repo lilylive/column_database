@@ -1,9 +1,8 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+let loginController = require('../controllers/login');
 
-router.get('/', (req, res, next) => {
-  res.render('login', { user: req.user });
-});
+router.get('/', loginController);
 
 module.exports = router;

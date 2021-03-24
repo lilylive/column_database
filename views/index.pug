@@ -26,12 +26,12 @@ block content
           each column in columns 
             tr
               td
-                a(href=`/posts/${column.columnId}`) #{column.columnName}
+                a(href=`/posts/columnId/${column.columnId}`) #{column.columnName}
               td #{column.formattedUpdatedAt}
       
       
     
-      div.my-3
+      div.my-3.lead
         h3 公開中のコラムはコチラ！
          a(href="/editor/admitted").btn.btn-info.my-3 公開中のコラム一覧  
           
@@ -56,15 +56,26 @@ block content
           each column in columns
             tr
               td
-                a(href=`/posts/${column.columnId}`) #{column.columnName}
+                a(href=`/posts/columnId/${column.columnId}`) #{column.columnName}
               td #{column.formattedUpdatedAt}
       div.my-3
          a(href="/editor/admitted") 公開中のコラム一覧  
    
   else 
-      a(href="/login") ログイン
+      a(href="/login").btn.btn-info.my-3  ログイン
 
-      div.my-3
-         a(href="/editor/admitted") 公開中のコラム一覧  
-          
-          
+      div.my-3.display-5
+         a(href="/editor/admitted") 公開中のコラム一覧
+      
+      - var admitted = adminCheck === 1
+      if admitted
+        h4.my-3 公開中のコラム一覧
+        table
+          tr 
+            th コラム名
+            th 更新日時
+          each column in columns
+            tr
+              td
+                a(href=`/posts/columnId/${column.columnId}`) #{column.columnName}
+              td #{column.formattedUpdatedAt}
